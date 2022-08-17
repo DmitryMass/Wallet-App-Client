@@ -1,30 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MainBalance from './MainBalance';
 import MyCards from './MyCards/MyCards';
 
 import styles from './wallet-info.m.css';
 import CardsMenu from '../CardsMenu/CardsMenu';
 import Button from '../Button';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLogoutMutation } from '../../Store/Slice/Login-Register/login-register-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../Store/Features/authSlice';
 
-const WalletInfo = ({ setUser, user }) => {
+const WalletInfo = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userToken.user);
   const [logout] = useLogoutMutation();
   const { t } = useTranslation();
-  useEffect(() => {
-    setUser(true);
-  }, []);
 
-  const navigate = useNavigate();
-
-  const logoutUser = async () => {
-    if (user) {
+  const handleLogoutUser = async () => {
+    try {
       await logout();
-      setUser((prev) => !prev);
       delete localStorage.user;
-      navigate('/');
+      dispatch(logoutUser());
       window.location.reload();
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -39,7 +38,7 @@ const WalletInfo = ({ setUser, user }) => {
       </div>
       <div className={styles.wallet__logout}>
         {user && (
-          <Button modificator={'edit'} handleClick={logoutUser}>
+          <Button modificator={'edit'} handleClick={handleLogoutUser}>
             {t('logout')}
           </Button>
         )}

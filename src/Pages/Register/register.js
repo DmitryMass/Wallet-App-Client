@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import InputField from '../../Components/InputField/InputField';
@@ -15,7 +15,7 @@ import styles from './register.m.css';
 const Register = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [registration, { isLoading, error, status, isError }] =
+  const [registration, { isLoading, error, isError }] =
     useRegistrationMutation();
 
   const handleRegistration = async (values) => {
@@ -23,12 +23,13 @@ const Register = () => {
     Object.entries(values).forEach((item) => {
       body.append(item[0], item[1]);
     });
-    await registration(body);
+    try {
+      const data = await registration(body);
+      !data.error && navigate('/login');
+    } catch (e) {
+      console.log(e);
+    }
   };
-
-  useEffect(() => {
-    if (status === 'fulfilled') navigate('/login');
-  }, [status]);
 
   return (
     <main className={styles.register}>

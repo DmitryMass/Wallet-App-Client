@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from './Header/Header';
@@ -9,16 +9,10 @@ import Login from '../Pages/Login/login';
 
 import '../Utils/i18n';
 import Home from '../Pages/Home/Home';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-  const [user, setUser] = useState(false);
-  const userInfo = localStorage.user && JSON.parse(localStorage.user);
-
-  useEffect(() => {
-    if (userInfo) {
-      setUser(userInfo);
-    }
-  }, [user, localStorage, setUser]);
+  const user = useSelector((state) => state.userToken.user);
 
   return (
     <Suspense fallback={'Loading...'}>
@@ -32,13 +26,7 @@ const App = () => {
             />
             <Route
               path='/wallet'
-              element={
-                user ? (
-                  <WalletInfo setUser={setUser} user={user} />
-                ) : (
-                  <Navigate to='/' />
-                )
-              }
+              element={user ? <WalletInfo /> : <Navigate to='/' />}
             />
             <Route
               path='/registration'

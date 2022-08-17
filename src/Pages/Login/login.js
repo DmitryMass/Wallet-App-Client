@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import Title from '../../Components/Title';
@@ -10,11 +10,14 @@ import { useTranslation } from 'react-i18next';
 import { useLoginMutation } from '../../Store/Slice/Login-Register/login-register-slice';
 
 import styles from '../Register/register.m.css';
+import { loginSuccess } from '../../Store/Features/authSlice';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [login, { error, status, isError, isLoading }] = useLoginMutation();
+  const [login, { error, isError, isLoading }] = useLoginMutation();
 
   const handleLogin = async (values) => {
     const body = new FormData();
@@ -25,18 +28,13 @@ const Login = () => {
       const data = await login(body);
       if (data.data.info === 'Ok') {
         localStorage.setItem('user', true);
-        window.location.reload();
+        dispatch(loginSuccess());
+        navigate('/wallet');
       }
     } catch (e) {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-    if (status === 'fulfilled') {
-      navigate('/wallet');
-    }
-  }, [status]);
 
   return (
     <main className={styles.register}>
