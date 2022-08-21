@@ -4,16 +4,20 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "webpack": "webpack",
-    "start": "webpack serve --open --mode=development"
+    "webpack": "webpack --mode=production",
+    "starting": "webpack serve --open --mode=development",
+    "start": "npm run webpack && node index.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/http-proxy": "^8.2.2",
+    "@fastify/static": "^6.5.0",
     "@reduxjs/toolkit": "^1.8.3",
     "date-fns": "^2.29.1",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "fastify": "^4.5.2",
     "formik": "^2.2.9",
     "i18next": "^21.9.0",
     "i18next-browser-languagedetector": "^6.1.4",

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const URL = 'http://localhost:3000/api';
+// const URL = 'http://localhost:3000/api';
+const URL = '/api';
 
 export const cardsApi = createApi({
   reducerPath: 'cardsApi',
