@@ -1,9 +1,16 @@
-Front End for Wallet App
+Client Wallet App
+
+App: https://jay-wallet-app.herokuapp.com/
+Server: https://github.com/DmitryMass/Wallet-App-Server
 
 Used:
 
-1. npm i
-2. npm start (for start)
-3. npm webpack (build project)
-
-Server (backend) => https://github.com/DmitryMass/Server_for_Wallet_app
+1. React (Hooks) / Intl(numberformat)
+2. Formik (Yup)
+3. React-Redux / RTK / RTK-Query
+4. Module CSS
+5. Webpack/Babel
+6. Heroku (Deploy)
+7. PropTypes
+8. react i18next
+9. NodeJs - Fastify (proxy/static)
