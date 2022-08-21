@@ -5,8 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "webpack": "webpack --mode=production",
+    "postinstall": "webpack --mode=production",
     "starting": "webpack serve --open --mode=development",
-    "start": "npm run webpack && node index.mjs"
+    "start": "node index.mjs"
   },
   "keywords": [],
   "author": "",
