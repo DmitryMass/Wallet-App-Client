@@ -19,6 +19,7 @@ server.register(fastifyStatic, {
 server.register(fastifyHttpProxy, {
   upstream: 'https://testing-rep.herokuapp.com/api',
   prefix: '/api',
+  http: true,
 });
 
 ROUTES.forEach((element) => {
