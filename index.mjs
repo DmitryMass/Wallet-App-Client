@@ -17,7 +17,7 @@ server.register(fastifyStatic, {
 });
 
 server.register(fastifyHttpProxy, {
-  upstream: 'https://testing-rep.herokuapp.com/api',
+  upstream: 'https://jay-wallet-app-server.herokuapp.com/api',
   prefix: '/api',
   http: true,
 });
