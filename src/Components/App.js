@@ -10,6 +10,8 @@ import Login from '../Pages/Login/login';
 import '../Utils/i18n';
 import Home from '../Pages/Home/Home';
 import { useSelector } from 'react-redux';
+import { APP_ROUTES } from './Constants/All-Routes';
+import NotFound from '../Pages/NotFoundPage/NotFound';
 
 const App = () => {
   const user = useSelector((state) => state.userToken.user);
@@ -21,21 +23,26 @@ const App = () => {
           <Header user={user} />
           <Routes>
             <Route
-              path='/'
-              element={user ? <Navigate to='/wallet' /> : <Home />}
+              path={APP_ROUTES.HOME}
+              element={user ? <Navigate to={APP_ROUTES.WALLET} /> : <Home />}
             />
             <Route
-              path='/wallet'
-              element={user ? <WalletInfo /> : <Navigate to='/' />}
+              path={APP_ROUTES.WALLET}
+              element={
+                user ? <WalletInfo /> : <Navigate to={APP_ROUTES.HOME} />
+              }
             />
             <Route
-              path='/registration'
-              element={user ? <Navigate to='/wallet' /> : <Register />}
+              path={APP_ROUTES.REGISTRATION}
+              element={
+                user ? <Navigate to={APP_ROUTES.WALLET} /> : <Register />
+              }
             />
             <Route
-              path='/login'
-              element={user ? <Navigate to='/wallet' /> : <Login />}
+              path={APP_ROUTES.LOGIN}
+              element={user ? <Navigate to={APP_ROUTES.WALLET} /> : <Login />}
             />
+            <Route path={APP_ROUTES.NOTFOUND} element={<NotFound />} />
           </Routes>
         </div>
         <Footer />
