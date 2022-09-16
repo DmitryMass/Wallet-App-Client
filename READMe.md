@@ -3,6 +3,8 @@ Client Wallet App
 App: https://jay-wallet-app.herokuapp.com/
 Server: https://github.com/DmitryMass/Wallet-App-Server
 
+![DESKTOP!](./src/Assets/Images/jWallet-server.png)
+
 Used:
 
 1. React (Hooks) / Intl(numberformat)
